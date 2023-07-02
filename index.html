@@ -11,11 +11,11 @@
            let randomNumber = Math.floor(Math.random()*2);
            
            if (randomNumber ===0){
-            return "Rock"
+            return "rock"
             } else if (randomNumber ===1){
-                return "Paper";
+                return "paper";
             } else{
-                return "Scissors";
+                return "scissors";
             }
         }
 
@@ -25,12 +25,12 @@
                 message = "Draw";
                 playerScore=0;
                 compScore=0;
-            } else if((playerSelection == "Paper" && computerSelection=="Scissors") || (playerSelection == "Scissors" && computerSelection=="Rock")||(playerSelection == "Rock" && computerSelection=="Paper")){
-                message = `You lose! ${computerSelection} beats ${playerSelection}`;
+            } else if((playerSelection == "paper" && computerSelection=="scissors") || (playerSelection == "scissors" && computerSelection=="rock")||(playerSelection == "rock" && computerSelection=="paper")){
+                message = `Round lost! ${computerSelection} beats ${playerSelection}`;
                 playerScore = 0;
                 compScore =1;
-            } else if((playerSelection == "Rock" && computerSelection== "Scissors") || (playerSelection == "Paper" && computerSelection=="Rock")||(playerSelection == "Scissors" && computerSelection=="Paper")){
-                message = `You Win! ${computerSelection} beats ${playerSelection}`;
+            } else if((playerSelection == "rock" && computerSelection== "scissors") || (playerSelection == "paper" && computerSelection=="rock")||(playerSelection == "scissors" && computerSelection=="paper")){
+                message = `Round won! ${computerSelection} beats ${playerSelection}`;
                 playerScore =1;
                 compScore =0;
             }
@@ -43,14 +43,15 @@
             let playerTotal = 0;
             let compTotal =0;
             while (round<=roundsToPlay){
-                playerSelection = prompt("Enter Rock, Paper, or Scissors:");
+                playerSelection = (prompt("Enter rock, paper, or scissors:")).toLowerCase();
                 let [text, playerScore, compScore] = playRound(playerSelection, computerSelection);
                 playerTotal = (playerScore >compScore)? playerTotal+=1:playerTotal;
                 compTotal = (compScore>playerScore)? compTotal+=1:compTotal;
                 console.log(text,playerTotal,compTotal);
                 round++;
-            } 
-            console.log(playerTotal,compTotal);
+            }
+
+            console.log(`Game over, final score are Player: ${playerTotal} to Computer: ${compTotal}`);
         }
 
         
