@@ -1,1 +1,2 @@
 # rock-paper-scissors
+This is a simple console project (no GUI) that demonstrates my understanding of the Js fundamentals leared so far in TOP. In summary, I will be creating a rock-paper-sicorrs game that takes users in put, and generates AI choice. 
