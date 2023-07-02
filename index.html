@@ -8,26 +8,32 @@
 <body>
     <script>
         function getComputerChoice(){
-           let randomNumber = Math.floor(Math.random()*8);
+           let randomNumber = Math.floor(Math.random()*2);
            
-           if (randomNumber <=2){
-            console.log(randomNumber);
+           if (randomNumber ===0){
             return "Rock"
-            } else if (randomNumber >2 && randomNumber<=5){
-                console.log(randomNumber);
+            } else if (randomNumber ===1){
                 return "Paper";
             } else{
-                console.log(randomNumber);
                 return "Scissors";
             }
         }
-        //Display message
 
-        //get user input
+        function playRound(playerSelection,computerSelection){
+            if (playerSelection == computerSelection){
+                return "Draw";
+            } else if((playerSelection == "Paper" && computerSelection=="Scissors") || (playerSelection == "Scissors" && computerSelection=="Rock")||(playerSelection == "Rock" && computerSelection=="Paper")){
+                return `You lose! ${computerSelection} beats ${playerSelection}`;
+            } else if((playerSelection == "Rock" && computerSelection== "Scissors") || (playerSelection == "Paper" && computerSelection=="Rock")||(playerSelection == "Scissors" && computerSelection=="Paper")){
+                return `You Win! ${computerSelection} beats ${playerSelection}`;
+            }
+        }
 
-        //main logic to evaluate winner of round
-
-        //output
+        const playerSelection = "Paper";
+        const computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+        let userScore = 0;
+        let computerScore =0;
     </script>
 
 </body>
