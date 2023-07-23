@@ -4,60 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
+    <link href="./styles.css" rel="stylesheet">
 </head>
 <body>
-    <script>
-        function getComputerChoice(){
-           let randomNumber = Math.floor(Math.random()*2);
-           
-           if (randomNumber ===0){
-            return "rock"
-            } else if (randomNumber ===1){
-                return "paper";
-            } else{
-                return "scissors";
-            }
-        }
+    <div class="header container">
+        <h1>ROCK, PAPER, SCISSORS: SHOOT!!!</h1>
+    </div>
 
-        function playRound(playerSelection,computerSelection){
-            let message,playerScore,compScore;
-            if (playerSelection == computerSelection){
-                message = "Draw";
-                playerScore=0;
-                compScore=0;
-            } else if((playerSelection == "paper" && computerSelection=="scissors") || (playerSelection == "scissors" && computerSelection=="rock")||(playerSelection == "rock" && computerSelection=="paper")){
-                message = `Round lost! ${computerSelection} beats ${playerSelection}`;
-                playerScore = 0;
-                compScore =1;
-            } else if((playerSelection == "rock" && computerSelection== "scissors") || (playerSelection == "paper" && computerSelection=="rock")||(playerSelection == "scissors" && computerSelection=="paper")){
-                message = `Round won! ${computerSelection} beats ${playerSelection}`;
-                playerScore =1;
-                compScore =0;
-            }
-            return [message,playerScore,compScore];
-        }
+    <div class="container text">
+        <p>Rock, Paper, Scissors - The classic two-player game.</p>
+        <p>If you don't know the rules already, you must have been leaving under a <em>ROCK</em></p>
+    </div>
 
-        function game(roundsToPlay){
-            let playerSelection;
-            let round =1;
-            let playerTotal = 0;
-            let compTotal =0;
-            while (round<=roundsToPlay){
-                playerSelection = (prompt("Enter rock, paper, or scissors:")).toLowerCase();
-                let [text, playerScore, compScore] = playRound(playerSelection, computerSelection);
-                playerTotal = (playerScore >compScore)? playerTotal+=1:playerTotal;
-                compTotal = (compScore>playerScore)? compTotal+=1:compTotal;
-                console.log(text,playerTotal,compTotal);
-                round++;
-            }
+    <div class="section1 container">
+    
+        <div id="profile" class="container">
+            <div class="player container">
+                <img src="./images/human profile picture.png"alt="user profile picture">
+                <div class="score-player">PLAYER </div>
+            </div>
+            <img id="playerChoice" src="./images/questionmark.jpg">
+        </div>
+        <div class="round-vs container">
+            <div class="round">ROUND
+                <div class="roundCount"> 0  </div>
+            </div>
+            <div class="vs">V.S</div>
+            <div class ="message">
+                <div class="roundAlert"></div>
+                <div class="roundMessage"></div>
+            </div>
+        </div>
+        <div id="profile" class="container">
+            <img id="computerChoice" src="./images/questionmark.jpg">
+            <div class="computer container">
+                <img src="./images/computer profile picture.png"alt="CPU profile picture">
+                <div class="score-cpu">C.P.U</div>
+            </div>
+        </div>
+    </div>
 
-            console.log(`Game over, final score are Player: ${playerTotal} to Computer: ${compTotal}`);
-        }
+    <div class="section2 container">
+        <p>CHOOSE YOUR WEAPON!!!</p>
+        <div id="playerSelection"class="buttons">
+            <img id="weapon" class="rock" src="./images/rock.png"alt="picture of rock">
+            <img id="weapon" class="paper" src="./images/paper.png"alt="picture of paper">
+            <img id="weapon" class="scissors" src="./images/scissors.png"alt="picture of scissors">
+        </div>
+    </div>
 
-        
-        const computerSelection = getComputerChoice();
-        
-    </script>
-
+    <div class="footer container">
+        <div>Copyright © Wilson Onazi 2023</div>
+    </div>
+    <script src="./scripts.js"></script>
 </body>
 </html>
