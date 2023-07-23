@@ -84,21 +84,23 @@ div.section1{
 .message{
     font-size: 30px;
     display:flex;
+    flex-direction: column;
     font-weight: bold;
     color: green;
     justify-content: center;
 }
 
-.round-message{
-    font-size:22px;
-}
-
 .message.lost{
     font-size: 30px;
     display:flex;
+    flex-direction: column;
     font-weight: bold;
-    color:red;
+    color: red;
     justify-content: center;
+}
+
+.roundMessage{
+    font-size:22px;
 }
 
 .player.container,.computer.container{

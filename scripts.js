@@ -1,39 +1,53 @@
 //Function declaraions
 playMatch = function (e){
+    let  roundAlert,roundMessage, playerScore, compScore, playerSelection,computerSelection;
+
     round++;
-    let playerSelection = e.target.className;
-    let computerSelection = getComputerChoice();
+    playerSelection = e.target.className;
+    computerSelection = getComputerChoice();
     updateInfo(playerSelection,computerSelection);
-    let [roundAlert,roundMessage, playerScore, compScore] = playRound(playerSelection, computerSelection);
+    [roundAlert,roundMessage, playerScore, compScore] = playRound(playerSelection, computerSelection);
     updateTotal(playerScore,compScore);
-    updateMessage(roundAlert,roundMessage);
+    updateMessage(roundAlert,roundMessage,compScore,playerScore);
+
+    let finalVerdict = ((playerTotal==5)? "YOU WIN!!!":compTotal==5? "YOU LOSE!!!":"");
+
+    if (playerTotal==5 || compTotal==5){
+        alert(`Game Over. ${finalVerdict}\nPlayer:${playerTotal}\nComputer:${compTotal}`);
+        restartGame();
+        return;
+    }
 }
 
 function updateInfo(playerSelection,computerSelection){
     playerChoice.setAttribute('src',`./images/${playerSelection}.png`);
-    computerChoice.setAttribute('src',`./images/loop.gif`);
     setTimeout(()=>{
         computerChoice.setAttribute('src',`./images/${computerSelection}.png`); 
     },500);//plays loop.gif for 0.5secs before computers choice
+    computerChoice.setAttribute('src',`./images/loop.gif`); 
+
     roundCount.textContent=`${round}`;
 }
 
+function updateMessage(roundAlert,roundMessage,compScore,playerScore){
+    verdict.textContent=`${roundAlert}`;
+    verdictInfo.textContent=`${roundMessage}`;
+    if (compScore>playerScore){
+        message.setAttribute("class","message lost");
+    }else{
+        message.setAttribute("class","message");
+    }
+}
+
 function updateTotal(playerScore,compScore){
-    if (playerScore>compScore){
+    if(playerScore>compScore){
         playerTotal+=1;
     }else if(compScore>playerScore){
         compTotal+=1;
-    }else{
-        console.log(roundAlert,roundMessage,playerTotal,compTotal);
     }
 
     computerScoreCard.textContent=`C.P.U: ${compTotal}`;
     playerScoreCard.textContent=`PLAYER: ${playerTotal}`;
-
-    if (playerTotal===5 || compTotal===5){
-        alert("Game Over");
-        restartGame();
-    }
 }
 
 
@@ -55,7 +69,7 @@ function playRound(playerSelection,computerSelection){
        (playerSelection == "paper" && computerSelection=="rock")||
        (playerSelection == "scissors" && computerSelection=="paper")){
         roundAlert = `Round won!`; 
-        roundMessage=`${computerSelection} beats ${playerSelection}`;
+        roundMessage=`${playerSelection} beats ${computerSelection}`;
         playerScore =1;
         compScore =0;
     }
@@ -76,13 +90,17 @@ function getComputerChoice(){
 
 function restartGame(){
     playerChoice.setAttribute('src',`./images/questionmark.jpg`);
-    computerChoice.setAttribute('src',`./images/questionmark.jpg`);
+    setTimeout(()=>{
+        computerChoice.setAttribute('src',`./images/questionmark.jpg`); 
+    },40);
     round =0;
     roundCount.textContent=`${round}`;
     playerTotal =0;
     compTotal = 0;
-    roundAlert="";//update test to empyt
-    roundMessage="";//update text to emepty
+    computerScoreCard.textContent=`C.P.U: ${compTotal}`;
+    playerScoreCard.textContent=`PLAYER: ${playerTotal}`;
+    verdict.textContent="";
+    verdictInfo.textContent="";
 }
 
 
@@ -100,8 +118,8 @@ weapons.forEach(button=>button.addEventListener('click',playMatch));
 const playerScoreCard = document.querySelector('.score-player');
 const playerChoice = document.querySelector('#playerChoice');
 const computerScoreCard = document.querySelector('.score-cpu');
-const computerChoice = document.querySelector('#computerChoice')
+const computerChoice = document.querySelector('#computerChoice');
 const roundCount = document.querySelector('.roundCount');
-const roundAlert = document.querySelector('.roundAlert');
-const roundMessage = document.querySelector('.roundMessage');
+const verdict = document.querySelector('.roundAlert');
+const verdictInfo= document.querySelector('.roundMessage');
 const message = document.querySelector('.message');
